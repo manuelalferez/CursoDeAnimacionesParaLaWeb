@@ -19,6 +19,9 @@
         .container {
             border: 1px solid red;
             width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
         }
 
         .container:hover .cuadrado {
@@ -37,13 +40,13 @@
             align-items: center;
             font-size: 20px;
             transition-duration: 1ms;
-            animation-name: cuadrado;
-            animation-duration: 2s;
+            animation-name: cuadrado, rebote;
+            animation-duration: 3s, 300ms;
             animation-fill-mode: forwards; /* Para que se mantenga en el mismo estado en el que acaba */
-            /* animation-timing-function: ease; */
+            animation-timing-function: linear, ease-in-out;
             /* animation-timing-function: ease-in; */
             /* animation-timing-function: ease-in-out; */
-            animation-timing-function: cubic-bezier(.63,-0.37,.3,1.32);
+            /* animation-timing-function: cubic-bezier(.63,-0.37,.3,1.32); */
             /* animation-timing-function: steps(60); */
             /* animation-delay: 2s; */
             /* animation-iteration-count: 2; */
@@ -65,6 +68,16 @@
             }
             100%{
                 left: calc(100% - 200px);
+            }
+        }
+
+        @keyframes rebote{
+            from{
+                transform: translateY(0px);
+            }
+
+            to{
+                transform: scale(1, 0.6) translateY(240px);
             }
         }
     </style>
