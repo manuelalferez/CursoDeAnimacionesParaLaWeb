@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>Notification</title>
     <style>
         body {
@@ -14,7 +14,8 @@
             margin: 0;
             height: 200vh;
         }
-        .header{
+
+        .header {
             height: 104px;
             background: #1d3644;
             display: flex;
@@ -22,7 +23,8 @@
             align-items: center;
             padding-right: 200px;
         }
-        .notification{
+
+        .notification {
             height: 52px;
             width: 50px;
             color: white;
@@ -32,13 +34,55 @@
             align-items: center;
             position: relative;
         }
-        .notification:before{
+
+        .notification:before {
             content: "\f0f3";
             font-family: "FontAwesome";
             display: block;
+            animation-duration: 1s;
         }
-        .notification:after{
-            content: "1";
+
+        .notification.notify:before {
+            animation-name: bell;
+            transform-origin: center top;
+            animation-timing-function: ease-out;
+        }
+
+        @keyframes bell {
+            0% {
+                transform: rotate(35deg);
+            }
+
+            12.5% {
+                transform: rotate(-30deg);
+            }
+
+            25% {
+                transform: rotate(25deg);
+            }
+
+            37.5% {
+                transform: rotate(-20deg);
+            }
+
+            50% {
+                transform: rotate(15deg);
+            }
+
+            62.5% {
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                transform: rotate(5deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .notification:after {
             font-size: 11px;
             font-weight: bold;
             color: white;
@@ -55,6 +99,16 @@
             position: absolute;
             top: 5px;
             right: 5px;
+            content: attr(data-count);
+            opacity: 0;
+            transition: .3s;
+            transform: scale(.5);
+            will-change: opacity, transform;
+        }
+
+        .notification.show-count:after {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .btn {
@@ -89,11 +143,23 @@
 
 <body>
     <div class="header">
-        <button class="btn primary">Enviar notificación</button>
-        <div class="notification"></div>
+        <button class="btn primary" id="button">Enviar notificación</button>
+        <div class="notification" id="notification"></div>
     </div>
     <script>
+        const $bell = document.getElementById("notification");
+        const $button = document.getElementById("button");
 
+        $button.addEventListener("click", () => {
+            const count = Number($bell.getAttribute('data-count')) || 0;
+            $bell.setAttribute('data-count', count + 1);
+            $bell.classList.add("show-count");
+
+            $bell.classList.add("notify");
+        });
+        $bell.addEventListener("animationend",()=>{
+            $bell.classList.remove("notify");
+        });
     </script>
 </body>
 
