@@ -5,45 +5,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>Waves</title>
     <style>
-        body{
+        body {
             margin: 0;
         }
-        .circulo{
-            width: 300px;
-            height: 300px;
-            background: rgba(0, 0, 0, .5);
-            border-radius: 50%;
-            position: absolute;
-            animation: 5s wave infinite alternate;
-        }
-        @keyframes wave{
-            0%{
-                transform: translateX(0) translateY(0);
-            }
-            100%{
-                transform: translateX(200px) translateY(200px);
-            }
-        }
-        .circulo.a{
-            animation-delay: 1s;
-        }
-        .circulo.b{
-            animation-delay: 2s;
-        }
-        .container{
+
+        .container {
+            height: 500px;
+            background: #0f9bf6;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            font-family: Arial;
+            text-align: center;
+            font-size: 2em;
+            color: rgba(255, 255, 255, .8);
+        }
+
+        .waves {
+            position: absolute;
+            bottom: -135px;
+            height: 527px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            left: -180px;
+            bottom: 0;
+            width: 2402px;
+            height: 427px;
+            background: url(waves.png) center bottom no-repeat;
+            animation: 5s wave ease-in-out infinite alternate;
+        }
+
+        .wave.a {
+            background-position: 0 -854px;
+        }
+
+        .wave.b {
+            background-position: 0 -427px;
+            animation-delay: .6s;
+        }
+
+        .wave.c {
+            background-position: 0 0;
+            animation-delay: 1.2s;
+        }
+
+
+        @keyframes wave {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-80px, 30px);
+            }
+
+            100% {
+                transform: translate(160px, -60px);
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="circulo a"></div>
-        <div class="circulo b"></div>
-        <div class="circulo c"></div>
+        <div class="content">
+            <h1>Hola mundo!</h1>
+            <p>Esto es una animación de olas del curso de animaciones web!</p>
+        </div>
+        <div class="waves">
+            <div class="wave a"></div>
+            <div class="wave b"></div>
+            <div class="wave c"></div>
+        </div>
     </div>
 </body>
 
