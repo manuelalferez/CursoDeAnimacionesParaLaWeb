@@ -6,161 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <title>Notification</title>
+    <title>Waves</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-image: url("platzi.png");
+        body{
             margin: 0;
-            height: 200vh;
         }
-
-        .header {
-            height: 104px;
-            background: #1d3644;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding-right: 200px;
-        }
-
-        .notification {
-            height: 52px;
-            width: 50px;
-            color: white;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .notification:before {
-            content: "\f0f3";
-            font-family: "FontAwesome";
-            display: block;
-            animation-duration: 1s;
-        }
-
-        .notification.notify:before {
-            animation-name: bell;
-            transform-origin: center top;
-            animation-timing-function: ease-out;
-        }
-
-        @keyframes bell {
-            0% {
-                transform: rotate(35deg);
-            }
-
-            12.5% {
-                transform: rotate(-30deg);
-            }
-
-            25% {
-                transform: rotate(25deg);
-            }
-
-            37.5% {
-                transform: rotate(-20deg);
-            }
-
-            50% {
-                transform: rotate(15deg);
-            }
-
-            62.5% {
-                transform: rotate(-10deg);
-            }
-
-            75% {
-                transform: rotate(5deg);
-            }
-
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-
-        .notification:after {
-            font-size: 11px;
-            font-weight: bold;
-            color: white;
-
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            min-width: 14px;
-            height: 14px;
-            background: #ff4600;
+        .circulo{
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 0, 0, .5);
             border-radius: 50%;
             position: absolute;
-            top: 5px;
-            right: 5px;
-            content: attr(data-count);
-            opacity: 0;
-            transition: .3s;
-            transform: scale(.5);
-            will-change: opacity, transform;
+            animation: 5s wave infinite alternate;
         }
-
-        .notification.show-count:after {
-            opacity: 1;
-            transform: scale(1);
+        @keyframes wave{
+            0%{
+                transform: translateX(0) translateY(0);
+            }
+            100%{
+                transform: translateX(200px) translateY(200px);
+            }
         }
-
-        .btn {
-            text-align: center;
-            padding: .6em .8em .8em;
-            border: none;
-            color: white;
-            background: lightgray;
-            margin: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: inset 0 -.2em rgba(0, 0, 0, .2);
-            outline: 0;
-            transition: .2s;
-            will-change: transform;
-            height: 60px;
+        .circulo.a{
+            animation-delay: 1s;
         }
-
-        .btn.primary {
-            background: #7dc800;
+        .circulo.b{
+            animation-delay: 2s;
         }
-
-        .btn.warning {
-            background: #ff463b;
-        }
-
-        .btn:active {
-            transform: scale(.9);
+        .container{
+            position: relative;
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <button class="btn primary" id="button">Enviar notificación</button>
-        <div class="notification" id="notification"></div>
+    <div class="container">
+        <div class="circulo a"></div>
+        <div class="circulo b"></div>
+        <div class="circulo c"></div>
     </div>
-    <script>
-        const $bell = document.getElementById("notification");
-        const $button = document.getElementById("button");
-
-        $button.addEventListener("click", () => {
-            const count = Number($bell.getAttribute('data-count')) || 0;
-            $bell.setAttribute('data-count', count + 1);
-            $bell.classList.add("show-count");
-
-            $bell.classList.add("notify");
-        });
-        $bell.addEventListener("animationend",()=>{
-            $bell.classList.remove("notify");
-        });
-    </script>
 </body>
 
 </html>
