@@ -5,54 +5,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Twitter like</title>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <title>Notification</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-image: url("platzi.png");
+            margin: 0;
+            height: 200vh;
+        }
+        .header{
+            height: 104px;
+            background: #1d3644;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 200px;
+        }
+        .notification{
+            height: 52px;
+            width: 50px;
+            color: white;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            margin: 0;
-            height: 98vh;
+            position: relative;
+        }
+        .notification:before{
+            content: "\f0f3";
+            font-family: "FontAwesome";
+            display: block;
+        }
+        .notification:after{
+            content: "1";
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-width: 14px;
+            height: 14px;
+            background: #ff4600;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            right: 5px;
         }
 
-        .like {
-            height: 100px;
-            width: 100px;
-            background-image: url("corazon.png");
+        .btn {
+            text-align: center;
+            padding: .6em .8em .8em;
+            border: none;
+            color: white;
+            background: lightgray;
+            margin: 5px;
+            border-radius: 5px;
             cursor: pointer;
-
+            box-shadow: inset 0 -.2em rgba(0, 0, 0, .2);
+            outline: 0;
+            transition: .2s;
+            will-change: transform;
+            height: 60px;
         }
 
-        .like.is-liked {
-            animation-name: like;
-            animation-duration: .8s;
-            animation-fill-mode: forwards;  
-            animation-timing-function: steps(28);
+        .btn.primary {
+            background: #7dc800;
         }
 
-        @keyframes like {
-            0% {
-                background-position: 0 0;
-            }
+        .btn.warning {
+            background: #ff463b;
+        }
 
-            100% {
-                background-position: right 0;
-            }
+        .btn:active {
+            transform: scale(.9);
         }
     </style>
 </head>
 
 <body>
-    <div class="tweet-box">
-        <div class="like" id="like"></div>
+    <div class="header">
+        <button class="btn primary">Enviar notificación</button>
+        <div class="notification"></div>
     </div>
     <script>
-        const $like = document.getElementById("like");
-        $like.addEventListener("click", (event) => {
-            $like.classList.toggle("is-liked");
-        });
 
     </script>
 </body>
